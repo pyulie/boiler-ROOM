@@ -5,20 +5,26 @@ class Mold {
       this.y = random(height); 
       // this.x = random(width/2 - 20, width/2 + 20);
       // this.y = random(height/2 - 20, height/2 + 20); 
-      this.r = 0.5;
+      this.r = 0.5 * 2.0;
       
       this.heading = random(360);
       this.vx = cos(this.heading);
       this.vy = sin(this.heading);
       this.rotAngle = 45;
       this.stop = false // Boolean variable to stop molds from moving 
-      
+
+      // this.color = color(random(255), random(255), random(255));
+        if (random(1) < 0.5) {
+      this.color = color(255, 105, 180); // Hot Pink (RGB: 255, 105, 180)
+    } else {
+      this.color = color(0, 0, 139); // Dark Blue (RGB: 0, 0, 139)
+    }
       // Sensor variables
       this.rSensorPos = createVector(0, 0);
       this.lSensorPos = createVector(0, 0);
       this.fSensorPos = createVector(0, 0);
       this.sensorAngle = 45;
-      this.sensorDist = 10;
+      this.sensorDist = 10 * 2.0;
       
     }
     
@@ -43,13 +49,13 @@ class Mold {
     
       // Get indices of the 3 sensor positions and get the color values from those indices
       let index, l, r, f;
-      index = 4*(d * floor(this.rSensorPos.y)) * (d * width) + 4*(d * floor(this.rSensorPos.x));
+      index = 4 * (d * floor(this.rSensorPos.y)) * (d * width) + 4*(d * floor(this.rSensorPos.x));
       r = pixels[index];
       
-      index = 4*(d * floor(this.lSensorPos.y)) * (d * width) + 4*(d * floor(this.lSensorPos.x));
+      index = 4 * (d * floor(this.lSensorPos.y)) * (d * width) + 4*(d * floor(this.lSensorPos.x));
       l = pixels[index];
       
-      index = 4*(d * floor(this.fSensorPos.y)) * (d * width) + 4*(d * floor(this.fSensorPos.x));
+      index = 4 * (d * floor(this.fSensorPos.y)) * (d * width) + 4*(d * floor(this.fSensorPos.x));
       f = pixels[index];
       
       // Compare values of f, l, and r to determine movement 
@@ -75,6 +81,9 @@ class Mold {
       fill(255);
       ellipse(this.x, this.y, this.r*2, this.r*2);
       
+      stroke(this.color)
+      // strokeWeight(2);
+      line(this.x, this.y, this.x + this.r * 3 * this.vx, this.y, this.r * 3 * this.vy);
       // line(this.x, this.y, this.x + this.r*3*this.vx, this.y + this.r*3*this.vy);
       // fill(255, 0, 0);
       // ellipse(this.rSensorPos.x, this.rSensorPos.y, this.r*2, this.r*2);

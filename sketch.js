@@ -1,10 +1,11 @@
 
 
-let molds = []; let num = 4000;
+let molds = []; 
+let num = 4000;
 let d; 
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   d = pixelDensity();
   
@@ -17,7 +18,7 @@ function draw() {
   background(0, 5);
   loadPixels();
   
-  for (let i=0; i<num; i++) {
+  for (let i = 0; i < num; i++) {
     if (key == "s") { // If "s" key is pressed, molds stop moving 
       molds[i].stop = true;
       updatePixels();
