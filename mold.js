@@ -15,9 +15,9 @@ class Mold {
 
       // this.color = color(random(255), random(255), random(255));
         if (random(1) < 0.5) {
-      this.color = color(255, 105, 180); // Hot Pink (RGB: 255, 105, 180)
+      this.color = color(247, 21, 5); // Hot Pink (RGB: 255, 105, 180)
     } else {
-      this.color = color(0, 0, 139); // Dark Blue (RGB: 0, 0, 139)
+      this.color = color(247, 90, 5); // Dark Blue (RGB: 0, 0, 139)
     }
       // Sensor variables
       this.rSensorPos = createVector(0, 0);
@@ -78,18 +78,25 @@ class Mold {
     
     display() {
       noStroke();
-      fill(255);
+      fill(0);
       ellipse(this.x, this.y, this.r*2, this.r*2);
       
       stroke(this.color)
       // strokeWeight(2);
-      line(this.x, this.y, this.x + this.r * 3 * this.vx, this.y, this.r * 3 * this.vy);
+      // line(this.x, this.y, this.x + this.r * 3 * this.vx, this.y, this.r * 3 * this.vy);
       // line(this.x, this.y, this.x + this.r*3*this.vx, this.y + this.r*3*this.vy);
       // fill(255, 0, 0);
       // ellipse(this.rSensorPos.x, this.rSensorPos.y, this.r*2, this.r*2);
       // ellipse(this.lSensorPos.x, this.lSensorPos.y, this.r*2, this.r*2);
       // ellipse(this.fSensorPos.x, this.fSensorPos.y, this.r*2, this.r*2);
       
+      // Pulsing effect for the line length
+      let pulseFactor = 1 + sin(frameCount * 20) * 0.7;  // Pulse between 0.5 and 1.5
+      
+      stroke(this.color);
+      let lineLength = this.r * 3 * pulseFactor;  // Scale the line's length with pulseFactor
+      
+      line(this.x, this.y, this.x + lineLength * this.vx, this.y + lineLength * this.vy);
     }
     
     getSensorPos(sensor, angle) {
